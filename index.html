@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEV Technical Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="logo">AEV</span>
+                <span class="brand-text">Systems</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-item active"><i class="icon">📊</i> Tổng quan</a>
+                <a href="#" class="nav-item"><i class="icon">📈</i> Hiệu suất</a>
+                <a href="#" class="nav-item"><i class="icon">⚙️</i> Kỹ thuật</a>
+                <a href="#" class="nav-item"><i class="icon">📄</i> Báo cáo</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="greeting">
+                    <h1>Báo Cáo Kỹ Thuật Tổng Quan</h1>
+                    <p>Chào mừng trở lại, <span class="highlight-user">FU</span>. Đây là báo cáo số liệu vận hành mới nhất.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">F</div>
+                    <div class="user-info">
+                        <strong>FU</strong>
+                        <span>Lead Engineer</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Highlight Metrics Cards -->
+            <section class="metrics-grid">
+                <div class="metric-card glassmorphism">
+                    <h3>Uptime Hệ Thống</h3>
+                    <div class="metric-value">99.98% <span class="trend up">↑ 0.02%</span></div>
+                </div>
+                <div class="metric-card glassmorphism">
+                    <h3>Băng Thông Tiêu Thụ</h3>
+                    <div class="metric-value">420 TB <span class="trend down">↓ 1.4%</span></div>
+                </div>
+                <div class="metric-card glassmorphism">
+                    <h3>Cảnh Báo Kỹ Thuật</h3>
+                    <div class="metric-value text-warning">4 <span class="trend warning">Chú ý</span></div>
+                </div>
+                <div class="metric-card glassmorphism">
+                    <h3>Lỗi Máy Chủ</h3>
+                    <div class="metric-value">0 <span class="trend up">Tốt</span></div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="chart-container glassmorphism col-span-2">
+                    <div class="chart-header">
+                        <h2>Tải Trọng Máy Chủ Đầu Cuối (Server Load)</h2>
+                        <span class="badge">Real-time</span>
+                    </div>
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div class="chart-container glassmorphism">
+                    <div class="chart-header">
+                        <h2>Tài Nguyên Sử Dụng</h2>
+                    </div>
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Data Table Section -->
+            <section class="table-section glassmorphism">
+                <div class="chart-header">
+                    <h2>Nhật Ký Sự Kiện / Lỗi Mới Nhất</h2>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Mã Máy Chủ</th>
+                            <th>Trạng Thái</th>
+                            <th>Mô Tả Kỹ Thuật</th>
+                            <th>Thời Gian Ghi Nhận</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SERV-001-ALPHA</td>
+                            <td><span class="status healthy">Hoạt động</span></td>
+                            <td>Xử lý hoàn tất tác vụ đồng bộ DB.</td>
+                            <td>10:45 AM</td>
+                        </tr>
+                        <tr>
+                            <td>SERV-002-BETA</td>
+                            <td><span class="status healthy">Hoạt động</span></td>
+                            <td>Nâng cấp bản vá bảo mật thành công.</td>
+                            <td>09:20 AM</td>
+                        </tr>
+                        <tr>
+                            <td>SERV-003-GAMMA</td>
+                            <td><span class="status warning">Quá tải</span></td>
+                            <td>Sử dụng CPU vọt lên 92%.</td>
+                            <td>08:15 AM</td>
+                        </tr>
+                        <tr>
+                            <td>SERV-004-DELTA</td>
+                            <td><span class="status error">Lỗi Mạng</span></td>
+                            <td>Mất kết nối với Gateway số 2.</td>
+                            <td>06:30 AM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
