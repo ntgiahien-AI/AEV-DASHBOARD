@@ -1,3 +1,5 @@
+import OpenAI from "https://esm.sh/openai";
+
 // Chart JS defaults for dark theme
 Chart.defaults.color = '#C5C6C7';
 Chart.defaults.font.family = 'Inter';
@@ -88,6 +90,77 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
+        }
+    });
+
+    // === CHATBOT LOGIC ===
+    const botWidget = document.getElementById('chatbot-widget');
+    const toggleBtn = document.getElementById('chatbot-toggle-btn');
+    const header = document.getElementById('chatbot-header');
+    
+    // Toggle collapse
+    header.addEventListener('click', () => {
+        botWidget.classList.toggle('collapsed');
+        toggleBtn.textContent = botWidget.classList.contains('collapsed') ? '▲' : '▼';
+    });
+
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send-btn');
+    const messagesContainer = document.getElementById('chat-messages');
+
+    // Khởi tạo SDK OpenAI
+    const openai = new OpenAI({
+        apiKey: "sk-4bd27113b7dc78d1-lh6jld-f4f9c69f",
+        baseURL: "https://9router.vuhai.io.vn/v1",
+        dangerouslyAllowBrowser: true // Bắt buộc khi dùng SDK trên frontend
+    });
+
+    // Thêm tin nhắn vào giao diện
+    function addMessage(text, type) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${type}-message`;
+        msgDiv.textContent = text;
+        messagesContainer.appendChild(msgDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    async function handleSend() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        
+        chatInput.value = '';
+        addMessage(text, 'user');
+        
+        // Disable input while waiting
+        chatInput.disabled = true;
+        sendBtn.disabled = true;
+
+        try {
+            const response = await openai.chat.completions.create({
+                model: "ces-chatbot-gpt-5.4",
+                messages: [
+                    { role: "system", content: "You are AEV Assistant, a helpful technical AI for the dashboard." },
+                    { role: "user", content: text }
+                ],
+                temperature: 0.7
+            });
+
+            const replyText = response.choices[0]?.message?.content || 'Xin lỗi, tôi không thể trả lời lúc này.';
+            addMessage(replyText, 'bot');
+        } catch (error) {
+            console.error('Lỗi khi gọi API Chatbot:', error);
+            addMessage('Đã có lỗi nối mạng với máy chủ AI.', 'bot');
+        } finally {
+            chatInput.disabled = false;
+            sendBtn.disabled = false;
+            chatInput.focus();
+        }
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSend();
         }
     });
 });

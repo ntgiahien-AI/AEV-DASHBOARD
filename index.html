@@ -126,6 +126,25 @@
             </section>
         </main>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbot-widget">
+        <div class="chatbot-header" id="chatbot-header">
+            <span>AEV Assistant</span>
+            <button id="chatbot-toggle-btn" class="toggle-btn">▼</button>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">Xin chào! Tôi có thể giúp gì cho bạn?</div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." autocomplete="off">
+                <button id="chat-send-btn">Gửi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ensure module script to use import map or ES modules -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
